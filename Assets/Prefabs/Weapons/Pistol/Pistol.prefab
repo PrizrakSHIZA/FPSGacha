@@ -180,6 +180,8 @@ MonoBehaviour:
   fireRate: 15
   force: 100
   rapidFire: 0
+  damageType: 0
+  elementalForce: 20
   layerMask:
     serializedVersion: 2
     m_Bits: 119
@@ -187,8 +189,18 @@ MonoBehaviour:
   impactEffect: {fileID: 8753673509623763208, guid: 91f03154b3bb2da41989207d935f4f8d,
     type: 3}
   isAiming: 0
-  recoilScript: {fileID: 0}
+  recoilX: -2
+  recoilY: 2
+  recoilZ: 0.35
+  aimRecoilX: -1.5
+  aimRecoilY: 1
+  aimRecoilZ: 0.3
+  snappiness: 6
+  returnspeed: 2
   weaponRecoil: {fileID: 5482831048117339527}
+  recoilForce: 2
+  weaponReturnSpeed: 2
+  weaponSnappiness: 6
 --- !u!1 &4672670503338894866
 GameObject:
   m_ObjectHideFlags: 0

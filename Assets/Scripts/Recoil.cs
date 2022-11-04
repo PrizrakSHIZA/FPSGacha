@@ -8,18 +8,18 @@ public class Recoil : MonoBehaviour
     Vector3 targetRotation;
 
     //hipfire recoil
-    [SerializeField] float recoilX;
-    [SerializeField] float recoilY;
-    [SerializeField] float recoilZ;
+    public float recoilX;
+    public float recoilY;
+    public float recoilZ;
 
     //aim recoil
-    [SerializeField] float aimRecoilX;
-    [SerializeField] float aimRecoilY;
-    [SerializeField] float aimRecoilZ;
+    public float aimRecoilX;
+    public float aimRecoilY;
+    public float aimRecoilZ;
 
     //settings
-    [SerializeField] float snappiness;
-    [SerializeField] float returnspeed;
+    public float snappiness;
+    public float returnspeed;
 
     void Update()
     {

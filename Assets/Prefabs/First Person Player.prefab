@@ -681,14 +681,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pwc: {fileID: 3001084133986013661}
-  recoilX: -2
-  recoilY: 2
-  recoilZ: 0.35
-  aimRecoilX: -1.5
-  aimRecoilY: 1
-  aimRecoilZ: 0.3
-  snappiness: 6
-  returnspeed: 2
+  recoilX: 0
+  recoilY: 0
+  recoilZ: 0
+  aimRecoilX: 0
+  aimRecoilY: 0
+  aimRecoilZ: 0
+  snappiness: 0
+  returnspeed: 0
 --- !u!1 &9132878688175986837
 GameObject:
   m_ObjectHideFlags: 0

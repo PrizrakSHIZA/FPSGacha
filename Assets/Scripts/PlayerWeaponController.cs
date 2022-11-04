@@ -17,7 +17,7 @@ public class PlayerWeaponController : MonoBehaviour
     public Weapon currentWeapon;
 
 
-    private void Start()
+    private void Awake()
     {
         Singleton = this;
     }

@@ -3,12 +3,18 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
+    [Header("Shoot settings")]
     public float damage = 10f;
     public float range = 100f;
     public float fireRate = 15f;
     public float force = 30f;
     public bool rapidFire = false;
 
+    [Header("Elemental settings")]
+    [SerializeField] ElementalDamage.ElementalType damageType;
+    [SerializeField] float elementalForce;
+
+    [Header("Visual settings")]
     public LayerMask layerMask;
     public ParticleSystem muzzleFlash;
     public GameObject impactEffect;
@@ -26,10 +32,27 @@ public class Weapon : MonoBehaviour
     Vector3 originalPosition;
 
 
-    [Header("Recoil")]
-    public Recoil recoilScript;
+    [Header("Camera Recoil")]
+    //hipfire recoil
+    [SerializeField] float recoilX;
+    [SerializeField] float recoilY;
+    [SerializeField] float recoilZ;
+    //aim recoil
+    [SerializeField] float aimRecoilX;
+    [SerializeField] float aimRecoilY;
+    [SerializeField] float aimRecoilZ;
+    //settings
+    [SerializeField] float snappiness;
+    [SerializeField] float returnspeed;
+
+    Recoil recoilScript;
+
+    [Header("Weapon Recoil")]
     public WeaponRecoil weaponRecoil;
-    
+    public float recoilForce = 2f;
+    public float weaponReturnSpeed = 2f;
+    public float weaponSnappiness = 6f;
+
     private void Start()
     {
         // Aiming
@@ -41,6 +64,19 @@ public class Weapon : MonoBehaviour
         originalPosition = weaponHolder.localPosition;
         mainCam = Camera.main;
         recoilScript = PlayerWeaponController.Singleton.Recoil;
+        //sewt camera recoil variables
+        recoilScript.recoilX = recoilX;
+        recoilScript.recoilY = recoilY;
+        recoilScript.recoilZ = recoilZ;
+        recoilScript.aimRecoilX = aimRecoilX;
+        recoilScript.aimRecoilY = aimRecoilY;
+        recoilScript.aimRecoilZ = aimRecoilZ;
+        recoilScript.snappiness = snappiness;
+        recoilScript.returnspeed = returnspeed;
+        //set weapon recoil veriables
+        weaponRecoil.force = recoilForce;
+        weaponRecoil.returnspeed = weaponReturnSpeed;
+        weaponRecoil.snappiness = weaponSnappiness;
     }
 
     void Update()
@@ -76,7 +112,7 @@ public class Weapon : MonoBehaviour
             
             if (target != null)
             {
-                target.TakeDamage(damage);
+                target.TakeDamage(damage, elementalForce, damageType);
             }
 
             if (hit.rigidbody != null)
