@@ -28,16 +28,21 @@ public class Target : MonoBehaviour
         
         float multiplier = 1f;
         Color textColor = Color.white;
-        
+
+        KeyValuePair<ElementalType, float> curStatus = new KeyValuePair<ElementalType, float>();
+
         //check elemental reactions
         foreach (KeyValuePair<ElementalType, float> status in StatusList)
         {
             if (status.Value > 0)
             {
                 Debug.Log("In");
-                ElementalDamage.ApplyReaction(type, status.Key, ref StatusList, out multiplier, out textColor);
+                curStatus = status;
+                break;
             }
         }
+
+        ElementalDamage.ApplyReaction(type, curStatus.Key, ref StatusList, out multiplier, out textColor);
 
         float totalDamage = damage * multiplier;
         ApplyDamage(totalDamage);
