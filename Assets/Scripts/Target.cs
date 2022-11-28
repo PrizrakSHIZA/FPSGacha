@@ -58,7 +58,6 @@ public class Target : MonoBehaviour
     void ApplyElement(ElementalType type, float amount)
     {
         StatusList[type] += amount;
-        Debug.Log(StatusList[type]);
     }
 
     void ShowBattleText(float damage, Color color)
