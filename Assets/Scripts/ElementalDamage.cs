@@ -14,6 +14,7 @@ public class ElementalDamage
         {
             case "FireFire": // solo Fire
                 multiplier = 1.3f;
+                color = new Color(255, 185, 0, 255);
                 if (StatusList[appliedElement] > 100)
                 {
                     StatusList[ElementalType.Burn] = 100;
@@ -24,6 +25,7 @@ public class ElementalDamage
                 break;
             case "IceIce": // solo Ice
                 multiplier = 1.3f;
+                color = Color.cyan;
                 if (StatusList[appliedElement] > 100)
                 {
                     StatusList[ElementalType.Frozen] = 100;

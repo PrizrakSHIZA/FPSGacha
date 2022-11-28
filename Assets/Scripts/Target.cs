@@ -36,7 +36,6 @@ public class Target : MonoBehaviour
         {
             if (status.Value > 0)
             {
-                Debug.Log("In");
                 curStatus = status;
                 break;
             }
@@ -46,7 +45,7 @@ public class Target : MonoBehaviour
 
         float totalDamage = damage * multiplier;
         ApplyDamage(totalDamage);
-        ShowBattleText(damage, textColor);
+        ShowBattleText(totalDamage, textColor);
     }
 
     void ApplyDamage(float damage)

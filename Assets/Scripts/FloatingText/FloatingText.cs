@@ -8,7 +8,7 @@ public class FloatingText : MonoBehaviour
 {
     float lifeTime;
     TextMeshPro textMeshPro;
-    Color textColor;
+    Color32 textColor;
 
     void Awake()
     {
@@ -17,15 +17,16 @@ public class FloatingText : MonoBehaviour
 
     void Update()
     {
+        textColor.a = 0;
+
         float moveYSpeed = 5f;
         transform.position += new Vector3(0, moveYSpeed) * Time.deltaTime;
 
         lifeTime -= Time.deltaTime;
         if (lifeTime < 0)
         {
-            textColor.a -= 3f * Time.deltaTime;
-            textMeshPro.color = textColor;
-            if (textColor.a < 0)
+            textMeshPro.color = Color.Lerp(textMeshPro.color, textColor, 15f * Time.deltaTime);
+            if (textMeshPro.color.a <= 0)
                 Destroy(gameObject);
         }
     }
