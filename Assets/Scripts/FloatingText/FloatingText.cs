@@ -26,7 +26,6 @@ public class FloatingText : MonoBehaviour
         if (lifeTime < 0)
         {
             textMeshPro.color = Color.Lerp(textMeshPro.color, textColor, 15f * Time.deltaTime);
-            Debug.Log(textMeshPro.color.a);
             if (textMeshPro.color.a <= 0.01)
                 Destroy(gameObject);
         }

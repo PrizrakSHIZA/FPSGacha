@@ -23,9 +23,7 @@ public class Target : MonoBehaviour
     };
 
     public void TakeDamage(float damage, float elementAmount, ElementalType type)
-    {
-        ApplyElement(type, elementAmount);
-        
+    {        
         float multiplier = 1f;
         Color textColor = Color.white;
 
@@ -40,6 +38,8 @@ public class Target : MonoBehaviour
                 break;
             }
         }
+
+        ApplyElement(type, elementAmount);
 
         ElementalDamage.ApplyReaction(type, curStatus.Key, ref StatusList, out multiplier, out textColor);
 
