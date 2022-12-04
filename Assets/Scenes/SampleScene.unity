@@ -131,7 +131,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh27922
+  m_Name: pb_Mesh27928
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1182,7 +1182,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh27954
+  m_Name: pb_Mesh27964
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1615,6 +1615,37 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &693107956
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 693107957}
+  m_Layer: 6
+  m_Name: HUD_Pos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &693107957
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 693107956}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.981, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1332369818}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &717341411
 GameObject:
   m_ObjectHideFlags: 0
@@ -2038,7 +2069,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh27880
+  m_Name: pb_Mesh27882
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2202,7 +2233,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh27986
+  m_Name: pb_Mesh27996
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2366,7 +2397,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh28054
+  m_Name: pb_Mesh28064
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -14262,7 +14293,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh28002
+  m_Name: pb_Mesh28012
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -14695,7 +14726,8 @@ Transform:
   m_LocalPosition: {x: 1.25, y: 1.72, z: 8.22}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 693107957}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -14711,8 +14743,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f8c15d0864da6c4ea4935461b1a2403, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 9999
+  showHUD: 1
+  HUDPosition: {fileID: 693107957}
+  maxHealth: 100
+  health: 100
   floatingTextPrefab: {fileID: 6696741723288521963, guid: 0474c7ad3c28a0e4fa14b5a3d9c5f0b9,
+    type: 3}
+  HudPrefab: {fileID: 980312016863127756, guid: 24098d5a429e1ca4fbd188ae90a64f76,
     type: 3}
 --- !u!1 &1376677072
 GameObject:
@@ -49273,7 +49310,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh28040
+  m_Name: pb_Mesh28050
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -49437,7 +49474,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh28026
+  m_Name: pb_Mesh28036
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -53674,7 +53711,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh28070
+  m_Name: pb_Mesh28080
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2

@@ -1,13 +1,23 @@
+using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using static ElementalDamage;
 
 public class Target : MonoBehaviour
 {
+    [SerializeField] bool showHUD = true;
+    [SerializeField] Transform HUDPosition;
+
+    public float maxHealth = 50f;
     public float health = 50f;
 
+    [Header("Prefabs")]
     [SerializeField] GameObject floatingTextPrefab;
+    [SerializeField] GameObject HudPrefab;
+
+    Image Hud;
 
     public Dictionary<ElementalType, float> StatusList = new Dictionary<ElementalType, float>()
     {
@@ -21,6 +31,12 @@ public class Target : MonoBehaviour
         { ElementalType.Electrolyze, 0f},
         { ElementalType.Shocked, 0f},
     };
+
+    private void Start()
+    {
+        if (showHUD)
+            Hud = Instantiate(HudPrefab, HUDPosition).GetComponent<EnemyHUDScript>().healthBar;
+    }
 
     public void TakeDamage(float damage, float elementAmount, ElementalType type)
     {        
@@ -46,6 +62,24 @@ public class Target : MonoBehaviour
         float totalDamage = damage * multiplier;
         ApplyDamage(totalDamage);
         ShowBattleText(totalDamage, textColor);
+        ChangeHealthBar();
+    }
+
+    public List<ElementalType> GetActiveTypes()
+    {
+        List<ElementalType> types = new List<ElementalType>();
+
+        foreach (KeyValuePair<ElementalType, float> status in StatusList)
+        {
+            if (status.Value > 0)
+                types.Add(status.Key);
+        }
+        return types;
+    }
+
+    void ChangeHealthBar()
+    {
+        Hud.fillAmount = maxHealth / 10000f * health;
     }
 
     void ApplyDamage(float damage)
@@ -66,59 +100,6 @@ public class Target : MonoBehaviour
         temp.GetComponent<FloatingText>().Setup(damage.ToString(), color);
     }
 
-    float ApplyReaction(ElementalType appliedElement, ElementalType elementOnTarget)
-    {
-        float multiplier = 1;
-        string key = appliedElement.ToString() + elementOnTarget.ToString();
-        switch (key)
-        {
-            case "FireFire": // solo Fire
-                multiplier = 1.3f;
-                if (StatusList[appliedElement] > 100)
-                { 
-                    StatusList[ElementalType.Burn] = 100;
-                    StatusList[appliedElement] = 0;
-                    multiplier = 1.5f;
-                }
-                break;
-            case "IceIce": // solo Ice
-                multiplier = 1.3f;
-                if (StatusList[appliedElement] > 100)
-                {
-                    StatusList[ElementalType.Frozen] = 100;
-                    StatusList[appliedElement] = 0;
-                    multiplier = 1.3f;
-                }
-                break;
-            case "VoltVolt":
-                multiplier = 1.3f;
-                if (StatusList[appliedElement] > 100)
-                {
-                    StatusList[ElementalType.Shocked] = 100;
-                    StatusList[appliedElement] = 0;
-                    multiplier = 1.5f;
-                }
-                break;
-            case "FireIce":
-            case "IceFire": // temperature difference
-                float water = (StatusList[appliedElement] + StatusList[elementOnTarget]) / 2;
-                StatusList[appliedElement] = 0;
-                StatusList[elementOnTarget] = 0;
-                StatusList[ElementalType.Water] = water;
-                multiplier = 2f;
-                break;
-            case "FireVolt":
-            case "VoltFire": // plasma
-                StatusList[appliedElement] = 0;
-                StatusList[elementOnTarget] = 0;
-                StatusList[ElementalType.Plasm] = 100;
-                multiplier = 1.2f;
-                break;
-            default:
-                break;
-        }
-        return multiplier;
-    }
 
     void Death()
     {
