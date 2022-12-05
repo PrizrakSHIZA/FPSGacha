@@ -12,12 +12,13 @@ public class Target : MonoBehaviour
 
     public float maxHealth = 50f;
     public float health = 50f;
+    public List<ElementalType> ActiveElements = new List<ElementalType>();
 
     [Header("Prefabs")]
     [SerializeField] GameObject floatingTextPrefab;
     [SerializeField] GameObject HudPrefab;
 
-    Image Hud;
+    EnemyHUDScript Hud;
 
     public Dictionary<ElementalType, float> StatusList = new Dictionary<ElementalType, float>()
     {
@@ -35,7 +36,10 @@ public class Target : MonoBehaviour
     private void Start()
     {
         if (showHUD)
-            Hud = Instantiate(HudPrefab, HUDPosition).GetComponent<EnemyHUDScript>().healthBar;
+        { 
+            Hud = Instantiate(HudPrefab, HUDPosition).GetComponent<EnemyHUDScript>();
+            Hud.Init(this);
+        }
     }
 
     public void TakeDamage(float damage, float elementAmount, ElementalType type)
@@ -59,27 +63,17 @@ public class Target : MonoBehaviour
 
         ElementalDamage.ApplyReaction(type, curStatus.Key, ref StatusList, out multiplier, out textColor);
 
+        UpdateActiveElements();
+
         float totalDamage = damage * multiplier;
         ApplyDamage(totalDamage);
         ShowBattleText(totalDamage, textColor);
         ChangeHealthBar();
     }
 
-    public List<ElementalType> GetActiveTypes()
-    {
-        List<ElementalType> types = new List<ElementalType>();
-
-        foreach (KeyValuePair<ElementalType, float> status in StatusList)
-        {
-            if (status.Value > 0)
-                types.Add(status.Key);
-        }
-        return types;
-    }
-
     void ChangeHealthBar()
     {
-        Hud.fillAmount = maxHealth / 10000f * health;
+        Hud.UpdageHealth();
     }
 
     void ApplyDamage(float damage)
@@ -92,6 +86,16 @@ public class Target : MonoBehaviour
     void ApplyElement(ElementalType type, float amount)
     {
         StatusList[type] += amount;
+    }
+
+    void UpdateActiveElements()
+    {
+        ActiveElements.Clear();
+        foreach (KeyValuePair<ElementalType, float> status in StatusList)
+        {
+            if (status.Value > 0)
+                ActiveElements.Add(status.Key);
+        }
     }
 
     void ShowBattleText(float damage, Color color)

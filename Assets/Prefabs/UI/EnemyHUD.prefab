@@ -87,7 +87,6 @@ GameObject:
   - component: {fileID: 1572581565768038642}
   - component: {fileID: 2981977917720675848}
   - component: {fileID: 6914505236114319415}
-  - component: {fileID: 8270974321477100057}
   m_Layer: 0
   m_Name: EnemyHUD
   m_TagString: Untagged
@@ -142,24 +141,6 @@ MonoBehaviour:
   windImg: {fileID: 585643487591325837}
   burnImg: {fileID: 5208576390372483452}
   healthBar: {fileID: 2501377265317237134}
---- !u!114 &8270974321477100057
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 980312016863127756}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f8c15d0864da6c4ea4935461b1a2403, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  showHUD: 1
-  HUDPosition: {fileID: 0}
-  maxHealth: 50
-  health: 50
-  floatingTextPrefab: {fileID: 0}
-  HudPrefab: {fileID: 0}
 --- !u!1 &2563800122925050576
 GameObject:
   m_ObjectHideFlags: 0

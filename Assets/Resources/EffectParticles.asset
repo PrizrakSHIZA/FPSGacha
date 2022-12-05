@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7837602a0f62f9e499aff48110a6fec1, type: 3}
+  m_Name: EffectParticles
+  m_EditorClassIdentifier: 
+  Fire: {fileID: 0}
+  Ice: {fileID: 0}
+  Volt: {fileID: 0}
+  Wind: {fileID: 0}
+  Water: {fileID: 0}
+  Burn: {fileID: 0}
+  Frozen: {fileID: 0}
+  Electrolyze: {fileID: 0}
+  Shocked: {fileID: 0}
