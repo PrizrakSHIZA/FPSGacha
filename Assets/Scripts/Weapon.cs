@@ -1,4 +1,6 @@
 using DG.Tweening;
+using System.Collections;
+using Unity.Burst.CompilerServices;
 using UnityEngine;
 
 public class Weapon : MonoBehaviour
@@ -64,7 +66,7 @@ public class Weapon : MonoBehaviour
         originalPosition = weaponHolder.localPosition;
         mainCam = Camera.main;
         recoilScript = PlayerWeaponController.Singleton.Recoil;
-        //sewt camera recoil variables
+        //set camera recoil variables
         recoilScript.recoilX = recoilX;
         recoilScript.recoilY = recoilY;
         recoilScript.recoilZ = recoilZ;
@@ -108,20 +110,7 @@ public class Weapon : MonoBehaviour
 
         if (Physics.Raycast(mainCam.transform.position, mainCam.transform.forward, out hit, range, layerMask))
         {
-            Target target = hit.transform.GetComponent<Target>();
-            
-            if (target != null)
-            {
-                target.TakeDamage(damage, elementalForce, damageType);
-            }
-
-            if (hit.rigidbody != null)
-            {
-                hit.rigidbody.AddForce(-hit.normal * force);
-            }
-
-            GameObject temp = Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal));
-            Destroy(temp, 1f);
+            StartCoroutine(BulletPause(hit));
         }
     }
 
@@ -129,7 +118,7 @@ public class Weapon : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(1))
         {
-            weaponHolder.DOLocalMove(aimPosition.localPosition, .5f);
+            weaponHolder.DOLocalMove(aimPosition.localPosition, .5f).SetEase(Ease.OutSine);
             mainCam.DOFieldOfView(30, .5f);
             playerMovement.speed -= 3;
             isAiming = true;
@@ -137,10 +126,30 @@ public class Weapon : MonoBehaviour
 
         if (Input.GetMouseButtonUp(1))
         {
-            weaponHolder.DOLocalMove(originalPosition, .5f);
+            weaponHolder.DOLocalMove(originalPosition, .5f).SetEase(Ease.OutSine);
             mainCam.DOFieldOfView(60, .5f);
             playerMovement.speed += 3;
             isAiming = false;
         }
+    }
+
+    IEnumerator BulletPause(RaycastHit hit)
+    {
+        Target target = hit.transform.GetComponent<Target>();
+
+        float dist = Vector3.Distance(hit.point, transform.position); 
+
+        yield return new WaitForSeconds(dist / 10 * 0.1f);
+        if (target != null)
+        {
+            target.TakeDamage(damage, elementalForce, damageType);
+        }
+
+        if (hit.rigidbody != null)
+        {
+            hit.rigidbody.AddForce(-hit.normal * force);
+        }
+        GameObject temp = Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal));
+        Destroy(temp, 1f);
     }
 }
